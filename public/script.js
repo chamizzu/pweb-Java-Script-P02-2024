@@ -54,6 +54,7 @@ function displayProducts(products) {
                     <p>Price: $${product.price}</p>
                 </div>
                 <div class="catalog-card-back">
+                    <p>${product.description}</p>
                     <p>Price: $${product.price}</p>
                     <button class="add-to-cart-btn">Add to Cart</button>
                 </div>

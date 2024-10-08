@@ -538,8 +538,9 @@ footer {
     padding: 10px 20px;
     background-color: var(--primary);
     border: none;
-    color: white;
-    border-radius: 5px;
+    font-weight: bold;
+    color: var(--base);
+    border-radius: 0;
     cursor: pointer;
     overflow: hidden; /* Agar garis tidak muncul di luar button */
 }
@@ -562,6 +563,7 @@ footer {
 
 .add-to-cart-btn:hover {
     background-color: var(--primary-content); /* Warna latar berubah saat hover */
+    color: var(--base-content);
 }
 
 .error-page {
