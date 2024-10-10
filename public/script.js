@@ -56,13 +56,36 @@ function displayProducts(products) {
                 <div class="catalog-card-back">
                     <p>${product.description}</p>
                     <p>Price: $${product.price}</p>
-                    <button class="add-to-cart-btn">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="TukuItemRek('${product.title}', '${product.price}')">Add to Cart</button>
                 </div>
             </div>
         `;
         catalogGrid.appendChild(productItem);
     });
 }
+
+function TukuItemRek(ProdukTitle, ProdukPrice) {
+    let barang = ProdukTitle;
+    let harga = ProdukPrice;
+    let belanjaan = JSON.parse(localStorage.getItem("All"));
+
+    if(belanjaan == null) belanjaan = [];
+    let baru = {
+        "barang": ProdukTitle,
+        "harga": ProdukPrice
+    };
+    localStorage.setItem("baru", JSON.stringify(baru));
+    belanjaan.push(baru);
+    localStorage.setItem("All", JSON.stringify(belanjaan));
+
+    alert(`Kamu Beli ${barang} dengan harga $${harga}`);
+}
+
+
+
+function saveArray(arrayName, array) {
+    localStorage.setItem(arrayName, JSON.stringify(array));
+  }
 
 // Fungsi untuk menampilkan semua produk dengan limit
 async function fetchProducts() {
@@ -124,8 +147,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('shopToggle');
+    const sidebar = document.getElementById('shopbar');
+    
+    const sidebarHidden = localStorage.getItem('shopbarHidden') === 'true';
+    if (sidebarHidden) {
+        sidebar.classList.add('hidden');
+    }
+    
+    toggleButton.addEventListener('click', function() {
+        sidebar.classList.toggle('hidden');
+        localStorage.setItem('shopbarHidden', sidebar.classList.contains('hidden'));
+    });
+});
+
 // Menambahkan event listener untuk tombol Show All
 document.getElementById('show-all-btn').addEventListener('click', () => {
     productLimit = 40; // Atur limit yang ingin ditampilkan
     fetchProducts(); // Panggil fungsi untuk mendapatkan semua produk
 });
+
+
+
+function SimpenItemRek() {
+
+}

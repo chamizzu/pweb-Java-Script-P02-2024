@@ -362,8 +362,8 @@ footer {
 
 .toggle-button {
     position: fixed;
-    top: 16%;
-    left: 10px;
+    top: 17%;
+    left: 13px;
     z-index: 2;
     background-color: var(--accent);
     color: var(--accent-content);
@@ -377,6 +377,26 @@ footer {
 .toggle-button:hover {
     background-color: var(--primary);
 }
+
+.shop-button {
+    position: fixed;
+    bottom: 5%;
+    right: 20px;
+    z-index: 3;
+    background-color: var(--accent);
+    color: var(--accent-content);
+    border: none;
+    border-radius: 100px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shop-button:hover {
+    background-color: var(--primary);
+}
+
+
 
 .side {
     width: 200px;
@@ -676,3 +696,23 @@ footer {
     background-color: var(--neutral);
 }
 
+.shop {
+    width: 400px;
+    background-color: var(--accent);
+    color: var(--base-content);
+    padding: 20px 20px;
+    height: 300vh;
+    margin-top: 14vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    overflow-x: hidden;
+    border-right: 1px solid var(--accent);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.shop.hidden {
+    transform: translateX(100%);
+}
