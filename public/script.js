@@ -3,6 +3,7 @@ const categoryTitle = document.getElementById('category-title');
 let currentCategory = ''; // Menyimpan kategori yang dipilih
 let productLimit = 40; // Jumlah produk default
 
+
 // Fungsi untuk menampilkan halaman error
 function displayErrorPage() {
     catalogGrid.innerHTML = `
@@ -64,22 +65,69 @@ function displayProducts(products) {
     });
 }
 
+// Function to handle adding items to the cart
 function TukuItemRek(ProdukTitle, ProdukPrice) {
-    let barang = ProdukTitle;
-    let harga = ProdukPrice;
-    let belanjaan = JSON.parse(localStorage.getItem("All"));
-
-    if(belanjaan == null) belanjaan = [];
-    let baru = {
+    let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
+    
+    let newItem = {
         "barang": ProdukTitle,
         "harga": ProdukPrice
     };
-    localStorage.setItem("baru", JSON.stringify(baru));
-    belanjaan.push(baru);
+
+    // Add new item to the cart
+    belanjaan.push(newItem);
     localStorage.setItem("All", JSON.stringify(belanjaan));
 
-    alert(`Kamu Beli ${barang} dengan harga $${harga}`);
+    // Show alert
+    alert(`Kamu beli ${ProdukTitle} dengan harga $${ProdukPrice}`);
+
+    // Update the checkout sidebar
+    renderCheckout();
 }
+
+// Function to render the checkout sidebar
+function renderCheckout() {
+    let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
+    let checkoutItems = document.getElementById('checkout-items');
+    let totalPriceEl = document.getElementById('total-price');
+    checkoutItems.innerHTML = '';
+
+    let totalPrice = 0;
+
+    belanjaan.forEach((item, index) => {
+        let itemElement = document.createElement('div');
+        itemElement.classList.add('checkout-item');
+        itemElement.innerHTML = `
+            <div class="groceries-card" >
+                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                <div>
+                <h4>${item.barang}</h4>
+                <p>Price: $${item.harga}</p>
+                </div>
+            </div>
+        `;
+
+        checkoutItems.appendChild(itemElement);
+
+        totalPrice += parseFloat(item.harga);
+    });
+    
+    totalPriceEl.textContent = `Total: $${totalPrice.toFixed(2)}`;
+}
+
+function removeItem(index) {
+    let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
+
+    belanjaan.splice(index, 1);
+    localStorage.setItem("All", JSON.stringify(belanjaan));
+
+    renderCheckout();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderCheckout();
+});
+
 
 
 
