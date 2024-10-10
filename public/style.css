@@ -362,14 +362,14 @@ footer {
 
 .toggle-button {
     position: fixed;
-    top: 15vh;
+    top: 16%;
     left: 10px;
     z-index: 2;
     background-color: var(--accent);
     color: var(--accent-content);
     border: none;
     border-radius: 4px;
-    padding: 10px;
+    padding: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -531,6 +531,10 @@ footer {
     justify-content: center;
     align-items: center;
     transform: rotateY(180deg); /* Membalik sisi belakang */
+}
+
+.catalog-card-back p {
+    padding: 10px;
 }
 
 .add-to-cart-btn {
