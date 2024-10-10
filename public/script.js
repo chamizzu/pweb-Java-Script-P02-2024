@@ -57,7 +57,7 @@ function displayProducts(products) {
                 <div class="catalog-card-back">
                     <p>${product.description}</p>
                     <p>Price: $${product.price}</p>
-                    <button class="add-to-cart-btn" onclick="TukuItemRek('${product.title}', '${product.price}')">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="TukuItemRek('${product.title}', '${product.price}', '${product.thumbnail}')">Add to Cart</button>
                 </div>
             </div>
         `;
@@ -66,10 +66,11 @@ function displayProducts(products) {
 }
 
 // Function to handle adding items to the cart
-function TukuItemRek(ProdukTitle, ProdukPrice) {
+function TukuItemRek(ProdukTitle, ProdukPrice, ProdukThumbnail) {
     let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
     
     let newItem = {
+        "gambar": ProdukThumbnail,
         "barang": ProdukTitle,
         "harga": ProdukPrice
     };
@@ -77,9 +78,6 @@ function TukuItemRek(ProdukTitle, ProdukPrice) {
     // Add new item to the cart
     belanjaan.push(newItem);
     localStorage.setItem("All", JSON.stringify(belanjaan));
-
-    // Show alert
-    alert(`Kamu beli ${ProdukTitle} dengan harga $${ProdukPrice}`);
 
     // Update the checkout sidebar
     renderCheckout();
@@ -90,29 +88,34 @@ function renderCheckout() {
     let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
     let checkoutItems = document.getElementById('checkout-items');
     let totalPriceEl = document.getElementById('total-price');
+    let totalItemsEl = document.getElementById('total-items');
     checkoutItems.innerHTML = '';
 
+
     let totalPrice = 0;
+    let totalItems = 0;
 
     belanjaan.forEach((item, index) => {
         let itemElement = document.createElement('div');
         itemElement.classList.add('checkout-item');
         itemElement.innerHTML = `
             <div class="groceries-card" >
-                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                <img src="${item.gambar}" alt="${item.barang}">
                 <div>
                 <h4>${item.barang}</h4>
                 <p>Price: $${item.harga}</p>
+                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
                 </div>
             </div>
         `;
 
         checkoutItems.appendChild(itemElement);
-
+        totalItems++;
         totalPrice += parseFloat(item.harga);
     });
     
     totalPriceEl.textContent = `Total: $${totalPrice.toFixed(2)}`;
+    totalItemsEl.textContent = `Total Items: ${totalItems}`;
 }
 
 function removeItem(index) {

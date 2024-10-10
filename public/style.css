@@ -415,6 +415,10 @@ footer {
     transition: transform 0.3s ease;
 }
 
+.side::-webkit-scrollbar {
+    display: hidden;
+}
+
 .side.hidden {
     transform: translateX(-100%);
 }
@@ -701,7 +705,7 @@ footer {
     background-color: var(--accent);
     color: var(--base-content);
     padding: 20px 20px;
-    height: 300vh;
+    height: calc(100vh - 14vh);
     margin-top: 14vh;
     position: fixed;
     top: 0;
@@ -712,6 +716,11 @@ footer {
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     overflow-y: auto;
+    
+}
+
+.shop::-webkit-scrollbar {
+    display: none;
 }
 
 .shop.hidden {
@@ -750,6 +759,22 @@ footer {
 
 .groceries-card p {
     margin-left: 1rem;
+}
+
+.groceries-card button {
+    margin-left: 1rem;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.groceries-card button:hover {
+    background-color: var(--accent);
+    color: var(--base-content);
 }
 
 .checkout-summary {
