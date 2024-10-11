@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" >
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -25,14 +25,7 @@
             </ul>
         </nav>
     </header>
-  
-    <!--KATALOG-->
-    <div class="catalog">
-        <div class="catalog-header">
-          <h2 id="category-title">Products</h2>
-        </div>
-        <hr>
-      </div>
+    
     <div class="toggle-button" id="sidebarToggle">
         <svg viewBox="0 0 24 24" width="26" height="24">
             <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -48,13 +41,12 @@
         <hr>
         
         <div id="checkout-items">
-            <!-- Items will be dynamically injected here -->
         </div>
     
         <div class="checkout-summary">
             <p id="total-price">Total: $0</p>
             <p id="total-items">Total Items: 0</p>
-            <button id="checkout-btn">Checkout</button>
+            <button id="checkout-btn" onclick="checkout()">Checkout</button>
         </div>
     </div>
     
@@ -62,7 +54,7 @@
     <div class="side" id="sidebar">
         <div class="sidebar-header">
             <h2>Filter Menu</h2>
-            <button class="sidebar-close">&times;</button>
+            
         </div>
         <ul>
             <li><a href="#" onclick="showCategory('smartphones')">Smartphones</a></li>
@@ -102,7 +94,6 @@
             </div>
         </div>
     </div>
-
     <!-- Footer -->
     <footer id="footer">
         <div class="container">
