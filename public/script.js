@@ -2,7 +2,7 @@
 const catalogGrid = document.getElementById('catalog-grid');
 const categoryTitle = document.getElementById('category-title');
 let currentCategory = ''; // Menyimpan kategori yang dipilih
-let productLimit = 100; // Jumlah produk default
+let productLimit = 50; // Jumlah produk default
 
 
 // Fungsi untuk menampilkan halaman error
@@ -157,26 +157,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCheckout();
 });
 
-function checkout() { 
-    let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
-    let totalPrice = document.getElementById('total-price').textContent;
-    let totalItems = document.getElementById('total-items').textContent;
 
-    let receipt = {
-        "receipt": belanjaan,
-        "total": totalPrice,
-        "items": totalItems
-    };
 
-    if (belanjaan.length > 0) {
-        localStorage.setItem("Receipt", JSON.stringify(receipt));
-        localStorage.removeItem("All");
-        alert('Checkout successful! Your items have been saved.');
-    } else {
-        alert('Your cart is empty. Please add items to the cart before checking out.');
-    }
-    renderCheckout();
-}
 
 function saveArray(arrayName, array) {
     localStorage.setItem(arrayName, JSON.stringify(array));
