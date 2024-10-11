@@ -1,7 +1,7 @@
 const catalogGrid = document.getElementById('catalog-grid');
 const categoryTitle = document.getElementById('category-title');
 let currentCategory = ''; // Menyimpan kategori yang dipilih
-let productLimit = 40; // Jumlah produk default
+let productLimit = 100; // Jumlah produk default
 
 
 // Fungsi untuk menampilkan halaman error
@@ -140,7 +140,6 @@ function checkout() {
 
     if (belanjaan.length > 0) {
         localStorage.setItem("Receipt", JSON.stringify(receipt));
-        
         localStorage.removeItem("All");
         alert('Checkout successful! Your items have been saved.');
     } else {
