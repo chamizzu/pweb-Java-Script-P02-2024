@@ -42,10 +42,30 @@
 
     </div>
     <div class="toggle-button" id="sidebarToggle">
-        <svg viewBox="0 0 24 24" width="24" height="24">
+        <svg viewBox="0 0 24 24" width="26" height="24">
             <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
     </div>
+
+    <div class="shop-button" id="shopToggle">
+        <img src="../assets/image.png" alt="Groceries Logo" width="45" height="40">
+    </div>
+
+    <div class="shop" id="shopbar">
+        <h2>Cart</h2>
+        <hr>
+        
+        <div id="checkout-items">
+            <!-- Items will be dynamically injected here -->
+        </div>
+    
+        <div class="checkout-summary">
+            <p id="total-price">Total: $0</p>
+            <p id="total-items">Total Items: 0</p>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </div>
+    
     
     <div class="side" id="sidebar">
         <div class="sidebar-header">

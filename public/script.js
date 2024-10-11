@@ -3,6 +3,7 @@ const categoryTitle = document.getElementById('category-title');
 let currentCategory = ''; // Menyimpan kategori yang dipilih
 let productLimit = 40; // Jumlah produk default
 
+
 // Fungsi untuk menampilkan halaman error
 function displayErrorPage() {
     catalogGrid.innerHTML = `
@@ -56,13 +57,86 @@ function displayProducts(products) {
                 <div class="catalog-card-back">
                     <p>${product.description}</p>
                     <p>Price: $${product.price}</p>
-                    <button class="add-to-cart-btn">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="TukuItemRek('${product.title}', '${product.price}', '${product.thumbnail}')">Add to Cart</button>
                 </div>
             </div>
         `;
         catalogGrid.appendChild(productItem);
     });
 }
+
+// Function to handle adding items to the cart
+function TukuItemRek(ProdukTitle, ProdukPrice, ProdukThumbnail) {
+    let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
+    
+    let newItem = {
+        "gambar": ProdukThumbnail,
+        "barang": ProdukTitle,
+        "harga": ProdukPrice
+    };
+
+    // Add new item to the cart
+    belanjaan.push(newItem);
+    localStorage.setItem("All", JSON.stringify(belanjaan));
+
+    // Update the checkout sidebar
+    renderCheckout();
+}
+
+// Function to render the checkout sidebar
+function renderCheckout() {
+    let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
+    let checkoutItems = document.getElementById('checkout-items');
+    let totalPriceEl = document.getElementById('total-price');
+    let totalItemsEl = document.getElementById('total-items');
+    checkoutItems.innerHTML = '';
+
+
+    let totalPrice = 0;
+    let totalItems = 0;
+
+    belanjaan.forEach((item, index) => {
+        let itemElement = document.createElement('div');
+        itemElement.classList.add('checkout-item');
+        itemElement.innerHTML = `
+            <div class="groceries-card" >
+                <img src="${item.gambar}" alt="${item.barang}">
+                <div>
+                <h4>${item.barang}</h4>
+                <p>Price: $${item.harga}</p>
+                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                </div>
+            </div>
+        `;
+
+        checkoutItems.appendChild(itemElement);
+        totalItems++;
+        totalPrice += parseFloat(item.harga);
+    });
+    
+    totalPriceEl.textContent = `Total: $${totalPrice.toFixed(2)}`;
+    totalItemsEl.textContent = `Total Items: ${totalItems}`;
+}
+
+function removeItem(index) {
+    let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
+
+    belanjaan.splice(index, 1);
+    localStorage.setItem("All", JSON.stringify(belanjaan));
+
+    renderCheckout();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderCheckout();
+});
+
+
+
+
+function saveArray(arrayName, array) {
+    localStorage.setItem(arrayName, JSON.stringify(array));
+  }
 
 // Fungsi untuk menampilkan semua produk dengan limit
 async function fetchProducts() {
@@ -237,3 +311,31 @@ document.addEventListener('click', function(event) {
 // Memperbarui ikon keranjang saat halaman dimuat
 updateCartIcon();
 renderCartItems();
+=======
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('shopToggle');
+    const sidebar = document.getElementById('shopbar');
+    
+    const sidebarHidden = localStorage.getItem('shopbarHidden') === 'true';
+    if (sidebarHidden) {
+        sidebar.classList.add('hidden');
+    }
+    
+    toggleButton.addEventListener('click', function() {
+        sidebar.classList.toggle('hidden');
+        localStorage.setItem('shopbarHidden', sidebar.classList.contains('hidden'));
+    });
+});
+
+// Menambahkan event listener untuk tombol Show All
+document.getElementById('show-all-btn').addEventListener('click', () => {
+    productLimit = 40; // Atur limit yang ingin ditampilkan
+    fetchProducts(); // Panggil fungsi untuk mendapatkan semua produk
+});
+
+
+
+function SimpenItemRek() {
+
+}
+>>>>>>> 85e04cdc5036bb21980a6ba5b2cf1c87df89e924
