@@ -83,6 +83,7 @@ function TukuItemRek(ProdukTitle, ProdukPrice, ProdukThumbnail) {
 
 function renderCheckout() {
     let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
+
     let checkoutItems = document.getElementById('checkout-items');
     let totalPriceEl = document.getElementById('total-price');
     let totalItemsEl = document.getElementById('total-items');
@@ -101,9 +102,9 @@ function renderCheckout() {
                 <div>
                     <h4>${item.barang}</h4>
                     <p>Price: $${item.harga}</p>
-                    <div class="quantity-controls" style="display: flex; align-items: center;">
+                    <div class="quantity-controls">
                         <button class="quantity-btn" onclick="decreaseQuantity(${index})">-</button>
-                        <span style="width: 30px; text-align: center; margin: 0 10px;" id="item-quantity-${index}">${item.quantity || 1}</span>
+                        <p>${item.quantity || 1}</p>
                         <button class="quantity-btn" onclick="increaseQuantity(${index})">+</button>
                     </div>
                     <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
@@ -162,6 +163,8 @@ function checkout() {
     let totalPrice = document.getElementById('total-price').textContent;
     let totalItems = document.getElementById('total-items').textContent;
 
+    let history = JSON.parse(localStorage.getItem("Sebelumnya")) || [];
+
     let receipt = {
         "receipt": belanjaan,
         "total": totalPrice,
@@ -170,8 +173,15 @@ function checkout() {
 
     if (belanjaan.length > 0) {
         localStorage.setItem("Receipt", JSON.stringify(receipt));
+
         localStorage.removeItem("All");
+
         alert('Checkout successful! Your items have been saved.');
+
+        history.push(receipt);
+
+        localStorage.setItem("Sebelumnya", JSON.stringify(history));
+
     } else {
         alert('Your cart is empty. Please add items to the cart before checking out.');
     }
