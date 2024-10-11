@@ -52,7 +52,8 @@ nav {
 }
 
 .logo {
-    height: 50px;
+    height: auto;
+    width: 60px;
     
 }
 
@@ -360,7 +361,6 @@ footer {
     margin-bottom: 1rem;
 }
 
-/* Layanan Page */
 
 .toggle-button {
     position: fixed;
