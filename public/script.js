@@ -198,37 +198,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Mendapatkan elemen yang diperlukan
-const cartIcon = document.querySelector('.cart-icon a');
-const sidebar = document.querySelector('.sidebar');
-const closeButton = document.querySelector('.sidebar-close');
+document.addEventListener('DOMContentLoaded', function() {
+    // Mendapatkan elemen untuk Shopbar (Cart)
+    const shopToggle = document.getElementById('shopToggle');
+    const shopbar = document.getElementById('shopbar');
 
-// Fungsi untuk membuka sidebar
-function openSidebar() {
-    sidebar.classList.add('open');
-}
+    // Fungsi untuk membuka Shopbar
+    function openShopbar() {
+        shopbar.classList.add('open');
+    }
 
-// Fungsi untuk menutup sidebar
-function closeSidebar() {
-    sidebar.classList.remove('open');
-}
+    // Fungsi untuk menutup Shopbar
+    function closeShopbar() {
+        shopbar.classList.remove('open');
+    }
 
-// Menambahkan event listener untuk ikon keranjang
-cartIcon.addEventListener('click', function (event) {
-    event.preventDefault(); // Mencegah aksi default link
-    openSidebar(); // Memanggil fungsi untuk membuka sidebar
+    // Event Listener untuk membuka Shopbar saat tombol di klik
+    shopToggle.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (shopbar.classList.contains('open')) {
+            closeShopbar();  // Jika sudah terbuka, maka tutup
+        } else {
+            openShopbar();   // Jika belum terbuka, maka buka
+        }
+    });
 });
-
-// Menambahkan event listener untuk tombol tutup sidebar
-closeButton.addEventListener('click', closeSidebar);
-
-
-
-
-// Mendapatkan elemen yang diperlukan
-const cartIconCount = document.querySelector('.cart-icon span');
-const cartItemsContainer = document.querySelector('.cart-items');
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Fungsi untuk memperbarui jumlah barang di ikon keranjang
 function updateCartIcon() {
@@ -311,7 +305,7 @@ document.addEventListener('click', function(event) {
 // Memperbarui ikon keranjang saat halaman dimuat
 updateCartIcon();
 renderCartItems();
-=======
+
 document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.getElementById('shopToggle');
     const sidebar = document.getElementById('shopbar');
@@ -333,9 +327,7 @@ document.getElementById('show-all-btn').addEventListener('click', () => {
     fetchProducts(); // Panggil fungsi untuk mendapatkan semua produk
 });
 
-
-
 function SimpenItemRek() {
 
 }
->>>>>>> 85e04cdc5036bb21980a6ba5b2cf1c87df89e924
+
