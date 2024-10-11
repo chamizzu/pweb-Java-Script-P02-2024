@@ -65,7 +65,6 @@ function displayProducts(products) {
     });
 }
 
-// Function to handle adding items to the cart
 function TukuItemRek(ProdukTitle, ProdukPrice, ProdukThumbnail) {
     let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
     
@@ -75,22 +74,19 @@ function TukuItemRek(ProdukTitle, ProdukPrice, ProdukThumbnail) {
         "harga": ProdukPrice
     };
 
-    // Add new item to the cart
     belanjaan.push(newItem);
     localStorage.setItem("All", JSON.stringify(belanjaan));
 
-    // Update the checkout sidebar
     renderCheckout();
 }
 
-// Function to render the checkout sidebar
 function renderCheckout() {
     let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
     let checkoutItems = document.getElementById('checkout-items');
     let totalPriceEl = document.getElementById('total-price');
     let totalItemsEl = document.getElementById('total-items');
-    checkoutItems.innerHTML = '';
 
+    checkoutItems.innerHTML = '';
 
     let totalPrice = 0;
     let totalItems = 0;
@@ -131,6 +127,27 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCheckout();
 });
 
+function checkout() { 
+    let belanjaan = JSON.parse(localStorage.getItem("All")) || [];
+    let totalPrice = document.getElementById('total-price').textContent;
+    let totalItems = document.getElementById('total-items').textContent;
+
+    let receipt = {
+        "receipt": belanjaan,
+        "total": totalPrice,
+        "items": totalItems
+    };
+
+    if (belanjaan.length > 0) {
+        localStorage.setItem("Receipt", JSON.stringify(receipt));
+        
+        localStorage.removeItem("All");
+        alert('Checkout successful! Your items have been saved.');
+    } else {
+        alert('Your cart is empty. Please add items to the cart before checking out.');
+    }
+    renderCheckout();
+}
 
 
 
