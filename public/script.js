@@ -273,9 +273,3 @@ document.getElementById('show-all-btn').addEventListener('click', () => {
     productLimit = 40; // Atur limit yang ingin ditampilkan
     fetchProducts(); // Panggil fungsi untuk mendapatkan semua produk
 });
-
-
-
-function SimpenItemRek() {
-
-}
